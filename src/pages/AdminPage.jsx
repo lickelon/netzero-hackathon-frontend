@@ -141,7 +141,7 @@ export default function SurveyPage() {
           </RoomData>
           <div className="tmpDiv">
           <RoomInfo room={room}></RoomInfo>
-          <SurveyQR></SurveyQR>
+          <SurveyQR room_id={room_id}></SurveyQR>
           </div>
 
         
