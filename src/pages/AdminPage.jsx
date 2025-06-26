@@ -38,7 +38,7 @@ const VoteGrid = styled.div`
 `;
 
 const CreatePage = styled.button`
-  font-size : 
+  font-size : 10px;
 `; 
 
 
