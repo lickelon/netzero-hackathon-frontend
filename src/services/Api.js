@@ -64,17 +64,19 @@ export function getLatestVoteTime(uuid) {
  * AC: [(float,float), ...]
  */
 
-export function getRoom(room_id) {
+export async function getRoom(room_id) {
   //TODO: get Room data from backend
-  let room = {};
-  room['name'] = 'my room';
-  room['width'] = 30.0;
-  room['height'] = 6.0;
-  room['depth'] = 1.0;
-  room['QR'] = [];
-  room['AC'] = [];
-  room['QR'].push([15, 0]);
-  room['AC'].push([30, 6]);
+  let room = await fetch('https://inha-net-zero-webapp.azurewebsites.net/room?room_id='+room_id)
+  .then((response) => response.json());
+  // let room = {};
+  // room['name'] = 'my room';
+  // room['width'] = 30.0;
+  // room['height'] = 6.0;
+  // room['depth'] = 1.0;
+  // room['QR'] = [];
+  // room['AC'] = [];
+  // room['QR'].push([15, 0]);
+  // room['AC'].push([30, 6]);
 
   console.log(room);
   return room;
