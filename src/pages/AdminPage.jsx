@@ -98,7 +98,7 @@ export default function SurveyPage() {
       <h1>관리자 페이지</h1>
       {room ? <RoomInfo room={room}></RoomInfo> : <button onClick={() => navigate('/create')}>create page</button>}
       
-      
+        
       {room ?
       <VoteWrap>
         <h>해당 칸의 설문 정보</h>
