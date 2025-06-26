@@ -13,7 +13,7 @@ export async function sendVote(uuid, room_id, vote) {
   const bodyData = {
     posX: vote.pos_x,
     posY: vote.pos_y,
-    enterTime: vote.enter_time,
+    enterTime: vote.enter_time/6,
     voteTime: vote.vote_time,
     hotColdScore: vote.score,
   };
