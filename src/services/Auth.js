@@ -4,6 +4,7 @@ export function auth() {
   const date = new Date();
   date.setTime(date.getTime() + 48*60*60*1000);
   document.cookie=`uuid=${uuid}; expires=${date}`;
+  return uuid;
 }
 
 function getCookie(name) {
