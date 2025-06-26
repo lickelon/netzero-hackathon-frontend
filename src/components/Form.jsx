@@ -3,9 +3,8 @@ import * as Forms from './Form.styles.js'
 import  testImg from '../../public/test.jpg'
 import { getRoom, sendVote } from '../services/Api.js';
 import { auth } from '../services/Auth.js';
-import { useLocation } from 'react-router-dom';
 
-export default function Form() {
+export default function Form({room_id}) {
   // 지하철 호선 
   const [trainLine, setTrainLine] = useState(null);
   //const trainLine = roomInfo.lineNum;
@@ -19,9 +18,6 @@ export default function Form() {
   // 탑승 시간
   const [enterTime, setEnterTime] = useState(0);
   const [temperature, setTemperature] = useState(0);
-  
-  const query = new URLSearchParams(useLocation().search);
-  const room_id = query.get('room_id'); // ← 여기가 핵심
 
   console.log(room_id);
 
@@ -67,13 +63,13 @@ export default function Form() {
   return (
     <Forms.Box>
       <Forms.Title>
-        <h2> 지 하 철 냉 방 조 절 서 비 스 </h2>
-        <p> 지하철의 온도를 조절할 수 있는 서비스 입니다. . . </p>
+        <h2> 지하철 냉방 조절 서비스 </h2>
+        <p> 현재 여러분의 생각을 공유해주세요. </p>
       </Forms.Title>
 
       <Forms.Block>
         <Forms.Label htmlFor="enter_time">
-          지하철에 탑승한 지 얼마나 지났나요? (분 단위)
+          <p>지하철에 탑승한 지 얼마나 지났나요? (분 단위)</p>
         </Forms.Label>
         <Forms.Input
           id="enter_time" type="number" onChange={(e) => setEnterTime(e.target.value)}

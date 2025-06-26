@@ -28,7 +28,9 @@ export async function sendVote(uuid, room_id, vote) {
     });
 
     if (!response.ok) {
+      
       throw new Error(`서버 에러: ${response.status}`);
+      
     }
 
     const result = await response.json();
@@ -67,7 +69,18 @@ export function getLatestVoteTime(uuid) {
 export async function getRoom(room_id) {
   //TODO: get Room data from backend
   let room = await fetch('https://inha-net-zero-webapp.azurewebsites.net/room?room_id=' + room_id)
-  .then((response) => response.json());
+  .then(response => {
+    if (!response.ok) {
+      // HTTP 에러면 여기서 에러 던짐 -> catch에서 잡힘
+      throw new Error(`서버 에러: ${response.status} ${response.statusText}`);
+    }
+    return response.json();
+  })
+  .catch(error => {
+    // 네트워크 에러거나 위에서 던진 에러를 여기서 잡음
+    console.error('fetch 에러:', error);
+    throw error;  // 필요하면 다시 던져서 바깥에서도 처리하게 할 수 있음
+  });
   // let room = {};
   // room['name'] = 'my room';
   // room['width'] = 30.0;
@@ -77,7 +90,7 @@ export async function getRoom(room_id) {
   // room['AC'] = [];
   // room['QR'].push([15, 0]);
   // room['AC'].push([30, 6]);
-
+  console.log("123123");
   console.log(room);
   return room;
 }
