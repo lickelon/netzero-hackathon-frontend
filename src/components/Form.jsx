@@ -8,14 +8,14 @@ export default function Form() {
   // 지하철 칸
   const [roomNum, setRoomNum] = useState(0);
   // 좌석 좌표
-  const [points, setPoints] = useState([]);
+  const [point, setPoint] = useState();
 
   const handleImgClick = (e) => {
     const rect = e.target.getBoundingClientRect();
     const x = e.clientX - rect.left;  // 이미지 내부 상대 좌표
     const y = e.clientY - rect.top;
 
-    setPoints([...points, { x, y }]);
+    setPoint({x, y});
   }
 
 
@@ -72,13 +72,12 @@ export default function Form() {
             </label>
             <div className="formbold-img">
               <img src={testImg} onClick={handleImgClick} className="clickable-image" />
-              {points.map((pt, index) => (
+              {point && (
                 <div
-                  key={index}
                   className="marker"
-                  style={{ left: `${pt.x}px`, top: `${pt.y}px` }}
-                />
-              ))}
+                  style={{ left: `${point.x}px`, top: `${point.y}px` }}
+                />)
+              }
             </div>
           </div>
 
