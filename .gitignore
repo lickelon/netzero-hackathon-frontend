@@ -1,0 +1,38 @@
+# dependencies
+/node_modules
+
+# build outputs
+/dist
+/.vitepress/dist
+
+# local env files
+.env*
+!.env.example
+
+# system files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# TypeScript
+*.tsbuildinfo
+
+# testing
+coverage/
+
+# Mac Finder metadata
+*.DS_Store
+
+# misc
+*.local
