@@ -8,6 +8,9 @@ module.exports = {
         ...colors,
         primary: "#1a74e5",
       },
+      fontFamily: {
+        nanum: ['"Nanum Gothic"', 'sans-serif'],
+      }
     },
   },
   plugins: [],
