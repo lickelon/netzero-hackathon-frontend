@@ -94,3 +94,26 @@ export async function getRoom(room_id) {
   console.log(room);
   return room;
 }
+
+export default async function getRooms(room_id){
+   try {
+    const response = await fetch(`https://inha-net-zero-webapp.azurewebsites.net/vote/all?room_id=${room_id}`, {
+      method: 'GET',
+      headers: {
+        'Accept': '*/*'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`서버 에러: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log('투표 데이터:', data);
+    return data;
+
+  } catch (error) {
+    console.error('요청 실패:', error);
+    return null;
+  } 
+}
