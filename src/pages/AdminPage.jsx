@@ -6,6 +6,7 @@ import getRooms, { getRoom } from "../services/Api";
 import RoomInfo from '../components/RoomInfo';
 import Votes from '../components/Votes';
 import { useNavigate } from 'react-router-dom';
+import SurveyQR from '../components/SurveyQR';
 
 const PageWrap = styled.div`
   background-color: light-dark(white, black);
@@ -95,9 +96,10 @@ export default function SurveyPage() {
   return (
     <PageWrap>
       <h1>관리자 페이지</h1>
-      {room ? <RoomInfo room={room}></RoomInfo> : <button onClick={() => navigate('/create')}>create page</button>}
-      
-        
+      <div className='flex justify-between items-center'>
+        {room ? <RoomInfo room={room}></RoomInfo> : <button onClick={() => navigate('/create')}>create page</button>}
+        <SurveyQR className="h-[500px]" room_id={room_id}></SurveyQR>
+      </div>
       {room ?
       <VoteWrap>
         <h>해당 칸의 설문 정보</h>
