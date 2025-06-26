@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Form from "../components/Form";
 import { getRoom } from "../services/Api";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 const PageWrap = styled.div`
   background-color: white;
@@ -23,42 +23,40 @@ function NotFound() {
 }
 
 export default function SurveyPage() {
-  const query = new URLSearchParams(useLocation().search);
-  const room_id = query.get('room_id');
-  
-  const [notFound, setNotFound] = useState(false);
-  const [loading, setLoading] = useState(true); // optional
-  
- useEffect(() => {
-  async function fetchRoom() {
+  const [searchParams] = useSearchParams();
+  const room_id = searchParams.get("room_id") || null;
+
+  const [room, setRoom] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
     if (!room_id) {
-      // room_id 없으면 바로 404 처리
-      setNotFound(true);
-      setLoading(false);
+      setRoom(null);
       return;
     }
 
-    try {
-      const res = await getRoom(room_id);
-    } catch (err) {
-      console.error("룸 정보를 불러오는 데 실패했습니다:", err.message);
-      setNotFound(true);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  fetchRoom();
-}, [room_id]);
-
-  if (loading) return <div>로딩 중...</div>;
-
-  if (notFound) return <NotFound />;
+    setLoading(true);
+    getRoom(room_id)
+      .then((_room) => {
+        setRoom(_room);
+      })
+      .catch((error) => {
+        console.error(error);
+        setRoom(null);
+      })
+      .finally(() => setLoading(false));
+  }, [room_id]);
   
 
   return (
     <PageWrap>
-      <Form room_id={room_id} />
+      {loading ? (
+        <p>불러오는 중...</p>
+      ) : room ? (
+        <Form room_id={room_id} />
+      ) : (
+        <NotFound />
+      )}
     </PageWrap>
   );
 }
