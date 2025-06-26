@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import * as Forms from './Form.styles.js'
 import  testImg from '../../public/test.jpg'
+import { sendVote } from '../services/Api.js';
 
 export default function Form() {
   // 지하철 호선 
@@ -13,8 +14,6 @@ export default function Form() {
   const [enterTime, setEnterTime] = useState(0);
   const [temperature, setTemperature] = useState(0);
 
-  const [voteData, setVoteData] = useState();
-
   const handleImgClick = (e) => {
     const rect = e.target.getBoundingClientRect();
     const x = e.clientX - rect.left;  // 이미지 내부 상대 좌표
@@ -24,41 +23,25 @@ export default function Form() {
     console.log(x, y);
   }
 
-  function formatDateTime(date) {
-    const pad = (n) => String(n).padStart(2, '0');
 
-    const year = date.getFullYear();
-    const month = pad(date.getMonth() + 1);
-    const day = pad(date.getDate());
-    const hour = pad(date.getHours());
-    const min = pad(date.getMinutes());
-    const sec = pad(date.getSeconds());
-
-    return `${year}-${month}-${day} ${hour}:${min}:${sec}`;
+  function formatDateTimeISO(date) {
+    return date.toISOString(); // 자동으로 ISO 8601 포맷, 예: "2025-06-26T12:00:00.000Z"
   }
 
   const saveData = () => {
-    console.log(enterTime);
-    console.log(trainLine);
-    console.log(roomNum);
-    console.log(temperature);
-    console.log(point);
 
     const currentTime = new Date();
     const previousTime = new Date(currentTime.getTime() - enterTime * 60 * 1000);
 
-    console.log(formatDateTime(previousTime));
-    console.log(formatDateTime(currentTime));
-    setVoteData(
-      {
-        pos_x : point.x,
-        pos_y : point.y,
-        enter_time: formatDateTime(previousTime),
-        vote_time: formatDateTime(currentTime),
-        score: temperature
-      }
+    const voteData = {
+      pos_x: point.x,
+      pos_y: point.y,
+      enter_time: formatDateTimeISO(previousTime),
+      vote_time: formatDateTimeISO(currentTime),
+      score: temperature,
+    }
 
-    )
+    sendVote("u123u123u", 1, voteData);
   }
 
   return (
