@@ -1,20 +1,11 @@
-import { useEffect, useState } from "react";
-import { getRoom } from "../services/Api";
+import RoomGraphics from "./RoomGraphics";
 
-export default function RoomInfo(props) {
-  const [room, setRoom] = useState("");
-  useEffect(() => {
-    getRoom(props.room_id)
-      .then((_room) => {
-        setRoom(_room);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [props.room_id]);
+export default function RoomInfo({room}) {
   return (
     <div>
-      <h1>{room['name']}</h1>
+      <h2>{room['name']}</h2>
+      <h2>{`${room['lineNum']}호선 ${room['trainNum']}호차 ${room['carNum']}번칸`}</h2>
+      <RoomGraphics room={room}></RoomGraphics>
     </div>
   );
 }
