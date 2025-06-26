@@ -7,15 +7,17 @@ import { auth } from '../services/Auth.js';
 
 export default function Form({room_id}) {
   // 지하철 호선 
-  const [lineNum, setLineNum] = useState(0);
-  const [trainNum, setTrainNum] = useState(0);
-  const [carNum, setCarNum] = useState(0);
+  const [lineNum, setLineNum] = useState(null);
+  const [trainNum, setTrainNum] = useState(null);
+  const [carNum, setCarNum] = useState(null);
   
   // 좌석 좌표
-  const [point, setPoint] = useState();
+  const [point, setPoint] = useState(null);
   // 탑승 시간
-  const [enterTime, setEnterTime] = useState(0);
-  const [temperature, setTemperature] = useState(0);
+  const [enterTime, setEnterTime] = useState(null);
+  const [temperature, setTemperature] = useState(null);
+  const [selected, setSelected] = useState(null);
+  const [rselected, setRselected] = useState(null);
 
   const initRoomInfo = async () => {
     const roomInfo = await getRoom(room_id);
@@ -43,7 +45,10 @@ export default function Form({room_id}) {
   }
 
   const saveData = () => {
-
+    if(!lineNum || !trainNum || !carNum || !point || !enterTime || !temperature){
+      alert("설문지의 빈 칸을 모두 채워주세요.");
+      return;
+    }
     const currentTime = new Date();
     const previousTime = enterTime;
 
@@ -54,8 +59,15 @@ export default function Form({room_id}) {
       vote_time: formatDateTimeISO(currentTime),
       score: temperature,
     }
-
     sendVote(auth(), room_id, voteData);
+
+    setPoint(null);
+    setEnterTime(null);
+    setTemperature(null);
+    setRselected(null);
+    setSelected(null);
+
+    alert("제출이 완료되었습니다!");
   }
 
   return (
@@ -73,17 +85,28 @@ export default function Form({room_id}) {
           <p>지하철에 탑승한 지 얼마나 지났나요?</p>
         </label>
         <div className="m-1 rounded-xl grid grid-cols-3 gap-2">
-          {[0, 5, 10, 15, 20, 30].map((val) => (
+          {[{a : 0, b : 1}, {a : 5, b : 2}, {a : 10, b : 3 }, {a : 15, b : 4}, {a : 20, b : 5}, {a : 30, b : 6}].map((val) => (
             <label key={val} className="aspect-square w-full relative">
               <input
                 type="radio"
                 name="interval"
-                value={val}
-                onChange={(e) => setEnterTime(e.target.value)}
+                value={val.a}
+                checked={selected == val.b}
+                onClick={(e) => {
+                  if (selected == val.b) {
+                    setEnterTime(null);
+                    setSelected(null);
+                  }
+                  else {
+                    setEnterTime(e.target.value);
+                    setSelected(val.b);
+                  }
+                  }
+                }
                 className="appearance-none w-full h-full rounded-md border-2 border-gray-200 cursor-pointer checked:border-gray-700 checked:shadow-lg transition"
               />
               <span className="nanum-gothic-bold absolute inset-0 flex items-center justify-center text-xl text-black pointer-events-none">
-                {`${val}m`}
+                {`${val.a} 분`}
               </span>
             </label>
           ))}
@@ -99,17 +122,28 @@ export default function Form({room_id}) {
         </div>
         
         <div className="m-1 rounded-full w-11/12 self-center h-[40px] flex justify-between items-center px-4" style={{backgroundImage:"linear-gradient(to right, #FF0909 0%, #F3481A 20%, #FABA2C 50%, #00BCF2)"}}>
-          {[-2, -1, 0, 1, 2].map((val) => (
+          {[{a : -2, b : 1}, {a : -1, b : 2}, {a : 0, b : 3 }, {a : 1, b : 4}, {a : 2, b : 5}].map((val) => (
             <label key={val} className="relative w-7 h-7 flex items-center justify-center">
               <input
                 type="radio"
-                value={val}
+                value={val.a}
                 name="temperature"
-                onChange={(e) => setTemperature(e.target.value)}
+                checked={rselected == val.b}
+                onClick={(e) => {
+                    if (rselected == val.b) {
+                      setTemperature(null);
+                      setRselected(null);
+                    }
+                    else {
+                      setTemperature(e.target.value);
+                      setRselected(val.b);
+                    }
+                  }
+                }
                 className="appearance-none w-7 h-7 rounded-full border-4 border-[rgba(255,255,255,0.6)] cursor-pointer"
               />
-              {temperature == val.toString() && (
-                <div className="absolute w-4 h-4 bg-[rgba(120,120,120,0.5)] rounded-full" />
+              {temperature == val.a.toString() && (
+                <div className="absolute w-4 h-4 bg-[rgba(120,120,120,0.8)] rounded-full" />
               )}
             </label>
           ))}

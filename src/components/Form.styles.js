@@ -79,7 +79,7 @@ export const Img = styled.div`
   max-width: 560px;
   height: auto;
   margin: 0 auto 24px;
-  border: 2px dashed #d1c4e9;
+  border: 2px dashedrgb(8, 2, 20);
   border-radius: 10px;
   overflow: hidden;
 
@@ -116,8 +116,8 @@ export const Button = styled.button`
 
 export const Marker = styled.div`
   position: absolute;
-  width: 12px;
-  height: 12px;
+  width: 20px;
+  height: 20px;
   background-color: #8e44ad;
   border: 2px solid #fff;
   border-radius: 50%;
