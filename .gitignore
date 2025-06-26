@@ -1,9 +1,6 @@
 # dependencies
 /node_modules
 
-# build outputs
-/dist
-/.vitepress/dist
 
 # local env files
 .env*
