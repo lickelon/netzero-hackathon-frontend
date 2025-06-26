@@ -46,17 +46,18 @@ const ACObject = styled(RoomObject)`
 
 
 export default function RoomGraphics({room}) {
+  let idx = 0;
   console.log(room.height);
   console.log(room.width);
   return (
     <Wrap height={room.height} width={room.width}>
       {room['aircons'].map((aircon) => (
-        <ACObject
+        <ACObject key={idx++}
           style={{ left: `${500 * (aircon.posX / room.width)}px`, top: `${500 * (room.height / room.width) * (aircon.posY / room.height)}px`}}
         />
       ))}
       {room['qrs'].map((qr) => (
-        <QRObject
+        <QRObject key={idx++}
           style={{ left: `${500 * (qr.posX / room.width)}px`, top: `${500 * (room.height / room.width) * (qr.posY / room.height)}px`}}
         />
       ))}
