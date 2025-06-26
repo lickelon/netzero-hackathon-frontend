@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import getRooms, { getRoom } from "../services/Api";
 import RoomInfo from '../components/RoomInfo';
 import Votes from '../components/Votes';
+import { useNavigate } from 'react-router-dom';
 
 const PageWrap = styled.div`
   background-color: light-dark(white, black);
@@ -38,7 +39,7 @@ const VoteGrid = styled.div`
 `;
 
 const CreatePage = styled.button`
-  font-size : 
+  
 `; 
 
 
@@ -47,15 +48,25 @@ export default function SurveyPage() {
   const room_id = searchParams.get("room_id") || null;
   const [room, setRoom] = useState("");
   const [votes, setVotes] = useState([]);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
-    if (room_id == null) return; //TODO: show room create page
+    if (!room_id) {
+      setRoom(null);
+      return;
+    }
+
+    setLoading(true);
     getRoom(room_id)
       .then((_room) => {
         setRoom(_room);
       })
       .catch((error) => {
         console.error(error);
-      });
+        setRoom(null);
+      })
+      .finally(() => setLoading(false));
   }, [room_id]);
 
   useEffect(() => {
@@ -85,7 +96,7 @@ export default function SurveyPage() {
   return (
     <PageWrap>
       <h1>관리자 페이지</h1>
-      {room ? <RoomInfo room={room}></RoomInfo> : <button>create page</button>}
+      {room ? <RoomInfo room={room}></RoomInfo> : <button onClick={() => navigate('/create')}>create page</button>}
       
       
       {room ?
