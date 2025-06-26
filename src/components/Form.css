@@ -15,5 +15,5 @@
 }
 
 .form-block {
-  @apply w-full rounded-xl bg-white p-[4px] shadow-[0px_2px_4px_2px_rgba(0,_0,_0,_0.1)] mb-[8px] flex flex-col;
+  @apply w-full rounded-xl bg-white p-[1vw] shadow-[0px_2px_4px_2px_rgba(0,_0,_0,_0.1)] mb-[clamp(2px,2vw,8px)] flex flex-col;
 }
