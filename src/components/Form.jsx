@@ -122,7 +122,7 @@ export default function Form({room_id}) {
         </div>
         
         <div className="m-1 rounded-full w-11/12 self-center h-[40px] flex justify-between items-center px-4" style={{backgroundImage:"linear-gradient(to right, #FF0909 0%, #F3481A 20%, #FABA2C 50%, #00BCF2)"}}>
-          {[{a : -2, b : 1}, {a : -1, b : 2}, {a : 0, b : 3 }, {a : 1, b : 4}, {a : 2, b : 5}].map((val) => (
+          {[{a : 2, b : 1}, {a : 1, b : 2}, {a : 0, b : 3 }, {a : -1, b : 4}, {a : -2, b : 5}].map((val) => (
             <label key={val} className="relative w-7 h-7 flex items-center justify-center">
               <input
                 type="radio"
