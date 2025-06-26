@@ -6,10 +6,46 @@
  * vote_time: string
  * score: int
  */
-export function sendVote(vote) {
+export async function sendVote(uuid, room_id, vote) {
   //TODO: send vote data to backend
   console.log(vote);
+
+  const bodyData = {
+    posX: vote.pos_x,
+    posY: vote.pos_y,
+    enterTime: vote.enter_time,
+    voteTime: vote.vote_time,
+    hotColdScore: vote.score,
+  };
+
+  try {
+    const response = await fetch(`https://inha-net-zero-webapp.azurewebsites.net/vote?uuid=${uuid}&room_id=${room_id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(bodyData),
+    });
+
+    if (!response.ok) {
+      throw new Error(`서버 에러: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log('서버 응답:', result);
+
+  } catch (error) {
+    console.error('요청 실패:', error);
+  }
+
 }
+
+// pos_x: point.x,
+//   pos_y : point.y,
+//     enter_time: formatDateTime(previousTime),
+//       vote_time: formatDateTime(currentTime),
+//         score: temperature
+
 export function getLatestVoteTime(uuid) {
   //TODO: get latest vote time from backend
   let date = new Date();
