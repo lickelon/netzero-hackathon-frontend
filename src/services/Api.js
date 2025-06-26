@@ -10,6 +10,7 @@ export function sendVote(vote) {
   //TODO: send vote data to backend
   console.log(vote);
 }
+
 export function getLatestVoteTime(uuid) {
   //TODO: get latest vote time from backend
   let date = new Date();
@@ -18,6 +19,9 @@ export function getLatestVoteTime(uuid) {
 /*
  * Room
  * name: string
+ * line_num: int 
+ * train_num: int
+ * train_car: int
  * width: float
  * height: float
  * depth: float

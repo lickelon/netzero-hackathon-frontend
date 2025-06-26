@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './Form.css'
+import * as Forms from './Form.styles.js'
 import  testImg from '../../public/test.jpg'
 
 export default function Form() {
@@ -61,86 +61,64 @@ export default function Form() {
     )
   }
 
-
   return (
-    <div className="formbold-main-wrapper">
-      <div className="formbold-form-wrapper">
-        <form action="https://formbold.com/s/FORM_ID" method="POST">
-          <div className="formbold-form-title">
-            <h2> 지 하 철 냉 방 조 절 서 비 스 </h2>
-            <p>
-              지하철의 온도를 조절할 수 있는 서비스 입니다. . . 
-            </p>
-          </div>
+    <Forms.Box>
+      <Forms.Title>
+        <h2> 지 하 철 냉 방 조 절 서 비 스 </h2>
+        <p> 지하철의 온도를 조절할 수 있는 서비스 입니다. . . </p>
+      </Forms.Title>
 
-          <div className="formbold-mb-3">
-            <label htmlFor="address2" className="formbold-form-label">
-              지하철에 탑승한 지 얼마나 지났나요? (분 단위)
-            </label>
+      <Forms.Block>
+        <Forms.Label htmlFor="enter_time">
+          지하철에 탑승한 지 얼마나 지났나요? (분 단위)
+        </Forms.Label>
+        <Forms.Input
+          id="enter_time" type="number" onChange={(e) => setEnterTime(e.target.value)}
+        />
+      </Forms.Block>
 
-            <input
-              type="number"
-              name="lastname"
-              id="lastname"
-              className="formbold-form-input"
-              onChange={(e) => setEnterTime(e.target.value)}
-            />
+      <Forms.Block>
+        <Forms.Label htmlFor="train-line">
+          현재 탑승한 지하철 호선
+        </Forms.Label>
+        <Forms.Input id="train-line" type="text" value={trainLine} readOnly />
+      </Forms.Block>
 
+      <Forms.Block>
+        <Forms.Label htmlFor="room-num">
+          현재 탑승한 호차
+        </Forms.Label>
+        <Forms.Input id="room-num" type="text" value={roomNum} readOnly />
 
-          </div>
+      </Forms.Block>
 
-          <div className="formbold-mb-3">
-            <label htmlFor="train-line" className="formbold-form-label">
-              현재 탑승한 지하철 호선
-            </label>
+      <Forms.Block>
+        <Forms.Label htmlFor="temperature-score">
+          현재 온도를 어떻게 느끼시고 있나요?
+        </Forms.Label>
+        <Forms.RadioArea id="temperature-score">
+          <label><input type="radio" value="2" name="temperature" onChange={(e) => setTemperature(e.target.value)} />매우 덥다</label>
+          <label><input type="radio" value="1" name="temperature" onChange={(e) => setTemperature(e.target.value)} />약간 덥다</label>
+          <label><input type="radio" value="0" name="temperature" onChange={(e) => setTemperature(e.target.value)} />적당하다</label>
+          <label><input type="radio" value="-1" name="temperature" onChange={(e) => setTemperature(e.target.value)} />약간 춥다</label>
+          <label><input type="radio" value="-2" name="temperature" onChange={(e) => setTemperature(e.target.value)} />매우 춥다</label>
+        </Forms.RadioArea>
+      </Forms.Block>
 
-            <input type="text" className="formbold-form-input" value={trainLine} readOnly />
-
-          </div>
-
-          <div className="formbold-mb-3">
-            <label htmlFor="address2" className="formbold-form-label">
-              현재 탑승한 호차
-            </label>
-            <input type="text" className="formbold-form-input" value={roomNum} readOnly />
-
-          </div>
-
-          <div className="formbold-mb-3">
-            <label htmlFor="address2" className="formbold-form-label">
-              현재 온도를 어떻게 느끼시고 있나요?
-            </label>
-            <div className="formbold-radio">
-              <label><input type="radio" value="2" name="temperature" onChange={(e) => setTemperature(e.target.value)}/>매우 덥다</label>
-              <label><input type="radio" value="1" name="temperature" onChange={(e) => setTemperature(e.target.value)}/>약간 덥다</label>
-              <label><input type="radio" value="0" name="temperature" onChange={(e) => setTemperature(e.target.value)}/>적당하다</label>
-              <label><input type="radio" value="-1" name="temperature" onChange={(e) => setTemperature(e.target.value)}/>약간 춥다</label>
-              <label><input type="radio" value="-2" name="temperature" onChange={(e) => setTemperature(e.target.value)}/>매우 춥다</label>
-            </div>
-          </div>
-
-          <div className="formbold-mb-3">
-            <label htmlFor="address2" className="formbold-form-label">
-              현재 위치를 표시해주세요. 
-            </label>
-            <div className="formbold-img">
-              <img src={testImg} onClick={handleImgClick} className="clickable-image" />
-              {point && (
-                <div
-                  className="marker"
-                  style={{ left: `${point.x}px`, top: `${point.y}px` }}
-                />)
-              }
-            </div>
-            <p> 넘길 때 나눠서 넘기면 될 듯 ? test 좌표 : {point && <div>
-                {point.x}, {point.y}
-              </div>}</p>
-          </div>
-          <button type="button" className="formbold-btn" onClick={saveData}> 저장하기
-            
-          </button>
-        </form>
-      </div>
-    </div>
+      <Forms.Block>
+        <Forms.Label htmlFor="location">
+          현재 위치를 표시해주세요.
+        </Forms.Label>
+        <Forms.Img id="location">
+          <img src={testImg} onClick={handleImgClick} className="clickable-image" />
+          {point && (
+            <Forms.Marker
+              style={{ left: `${point.x}px`, top: `${point.y}px` }}
+            />)
+          }
+        </Forms.Img>
+      </Forms.Block>
+      <Forms.Button type="button" onClick={saveData}> 저장하기 </Forms.Button>
+    </Forms.Box>
   )
 }
