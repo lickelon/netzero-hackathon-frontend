@@ -71,17 +71,17 @@ export default function Form({room_id}) {
   }
 
   return (
-    <form className="bg-white p-[32px] max-w-[640px] w-full shadow-2xl m-[20px] rounded-xl">
-      <div className="w-full rounded-xl bg-white p-[5px] shadow-[0px_4px_10px_2px_rgba(0,_0,_0,_0.1)] mb-[32px]">
-        <h2 className="nanum-gothic-bold font-bold text-black text-4xl"> 지하철 냉방 조절 서비스 </h2>
-        <p className="nanum-gothic-bold font-bold text-gray-600 text-sm"> 현재 여러분의 생각을 공유해주세요. </p>
+    <form className="bg-white p-[clamp(8px,6vw,24px)] max-w-[640px] w-full shadow-2xl m-[clamp(4px,3vw,12px)] rounded-xl">
+      <div className="w-full rounded-xl bg-white p-[5px] shadow-[0px_4px_10px_2px_rgba(0,_0,_0,_0.1)] mb-[clamp(4px,3vw,12px)]">
+        <h2 className="nanum-gothic-bold font-bold text-black text-[clamp(14px,4vw,40px)]"> 지하철 냉방 조절 서비스 </h2>
+        <p className="nanum-gothic-bold font-bold text-gray-600 text-[clamp(6px,2vw,14px)]"> 현재 여러분의 생각을 공유해주세요. </p>
       </div>
       <div className="form-block">
-        <p className="nanum-gothic-bold font-bold text-gray-700 text-3xl">현재 지하철 탑승 정보</p>
-          <p className="nanum-gothic-bold font-bold text-gray-700 text-sm">{`${lineNum}호선 ${trainNum}호차 ${carNum}칸`}</p>
+        <p className="nanum-gothic-bold font-bold text-gray-700 text-[clamp(10px,3.5vw,30px)]">현재 지하철 탑승 정보</p>
+          <p className="nanum-gothic-bold font-bold text-gray-700 text-[clamp(6px,2vw,14px)]">{`${lineNum}호선 ${trainNum}호차 ${carNum}칸`}</p>
       </div>
       <div className="form-block">
-        <label className="nanum-gothic-bold font-bold text-black text-2xl m-1" htmlFor="enter_time">
+        <label className="nanum-gothic-bold font-bold text-black text-[clamp(8px,3vw,20px)] m-1" htmlFor="enter_time">
           <p>지하철에 탑승한 지 얼마나 지났나요?</p>
         </label>
         <div className="m-1 rounded-xl grid grid-cols-3 gap-2">
@@ -114,11 +114,11 @@ export default function Form({room_id}) {
       </div>
       <div className="form-block">
         <div className='flex justify-between items-center w-11/12 self-center'>
-          <p className='nanum-gothic-bold text-[rgba(105,105,105,0.7)]'>더움</p>
-          <label className="nanum-gothic-bold font-bold text-black text-2xl m-1" htmlFor="temperature-score">
+          <p className='nanum-gothic-bold text-[rgba(105,105,105,0.7)] text-[clamp(5px,2.5vw,15px)]'>더움</p>
+          <label className="nanum-gothic-bold font-bold text-black text-[clamp(8px,3vw,20px)] m-1" htmlFor="temperature-score">
             현재 체감 온도는 어떠신가요?
           </label>
-          <p className='nanum-gothic-bold text-[rgba(105,105,105,0.7)]'>추움</p>
+          <p className='nanum-gothic-bold text-[rgba(105,105,105,0.7)] text-[clamp(5px,2.5vw,15px)]'>추움</p>
         </div>
         
         <div className="m-1 rounded-full w-11/12 self-center h-[40px] flex justify-between items-center px-4" style={{backgroundImage:"linear-gradient(to right, #FF0909 0%, #F3481A 20%, #FABA2C 50%, #00BCF2)"}}>
@@ -150,7 +150,7 @@ export default function Form({room_id}) {
         </div>
       </div>
       <div className="form-block">
-        <label className="nanum-gothic-bold font-bold text-black text-2xl m-1" htmlFor="location">
+        <label className="nanum-gothic-bold font-bold text-black text-[clamp(8px,3vw,20px)] m-1" htmlFor="location">
           현재 위치를 표시해주세요.
         </label>
         <Forms.Img id="location">
