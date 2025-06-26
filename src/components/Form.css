@@ -1,1 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+.form-block {
+  @apply w-full rounded-xl bg-white p-[4px] shadow-md mb-[8px] flex flex-col;
+}

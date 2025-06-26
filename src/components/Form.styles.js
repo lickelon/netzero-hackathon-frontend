@@ -3,12 +3,12 @@ import styled from 'styled-components';
 export const Box = styled.form`
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
   font-family: 'Inter', sans-serif;
-  & * {
+  /* & * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  background: #FFEAD8;
+  } */
+  background: white;
   padding: 32px;
   max-width: 1000px;
   margin: 40px auto;
@@ -27,7 +27,7 @@ export const Title = styled.div`
   h2 {
     font-weight: 700;
     font-size: 32px;
-    color: #5e30b2;
+    color: black;
     margin-bottom: 8px;
   }
   p {
