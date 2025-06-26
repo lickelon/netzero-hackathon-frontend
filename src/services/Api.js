@@ -81,16 +81,6 @@ export async function getRoom(room_id) {
     console.error('fetch 에러:', error);
     throw error;  // 필요하면 다시 던져서 바깥에서도 처리하게 할 수 있음
   });
-  // let room = {};
-  // room['name'] = 'my room';
-  // room['width'] = 30.0;
-  // room['height'] = 6.0;
-  // room['depth'] = 1.0;
-  // room['QR'] = [];
-  // room['AC'] = [];
-  // room['QR'].push([15, 0]);
-  // room['AC'].push([30, 6]);
-  console.log("123123");
   console.log(room);
   return room;
 }
