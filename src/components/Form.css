@@ -1,6 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css');
 @import "tailwindcss";
 
+.nanum-gothic-regular {
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.nanum-gothic-bold {
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
 .form-block {
-  @apply w-full rounded-xl bg-white p-[4px] shadow-md mb-[8px] flex flex-col;
+  @apply w-full rounded-xl bg-white p-[4px] shadow-[0px_2px_4px_2px_rgba(0,_0,_0,_0.1)] mb-[8px] flex flex-col;
 }

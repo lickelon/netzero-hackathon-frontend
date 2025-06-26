@@ -39,7 +39,6 @@ const VoteGrid = styled.div`
 `;
 
 const CreatePage = styled.button`
-  
 `; 
 
 
