@@ -1,12 +1,21 @@
+import styled from "styled-components";
 import RoomGraphics from "./RoomGraphics";
+
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+    margin-top: 20px;
+  `
+  
+
 
 export default function RoomInfo({room}) {
   return (
-    <div>
-      <h2>{room['name']}</h2>
-      <h2>{`${room['lineNum']}호선 ${room['trainNum']}호차 ${room['carNum']}번칸`}</h2>
+    <Wrapper>
       <RoomGraphics room={room}></RoomGraphics>
-
-    </div>
+    </Wrapper>
   );
 }

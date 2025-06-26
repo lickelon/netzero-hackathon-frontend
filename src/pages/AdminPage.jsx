@@ -7,16 +7,20 @@ import RoomInfo from '../components/RoomInfo';
 import Votes from '../components/Votes';
 import { useNavigate } from 'react-router-dom';
 import SurveyQR from '../components/SurveyQR';
+import { QRCodeCanvas } from 'qrcode.react';
 
 const PageWrap = styled.div`
   background-color: light-dark(white, black);
   display: flex;
   flex-direction: column;
   align-items: center;
-  //justify-content: center;
   padding: 0px;
   width: 100vw;
   height: 100vh;
+
+  h1{
+    margin-bottom: 20px;
+  }
 `;
 
 const VoteWrap = styled.div`
@@ -25,11 +29,27 @@ const VoteWrap = styled.div`
   gap: 10px;
   margin-top: 40px;
   
+  padding : 15px;
+  border-radius: 10px;
+  border: dashed black 3px;
+
+
   h{
     font-weight: bold;
     font-size: 23px;
+    
   }
 
+`
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  .tmpDiv{
+    display:flex;
+    flex-direction: row;
+  }
 `
 
 const VoteGrid = styled.div`
@@ -37,11 +57,25 @@ const VoteGrid = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   padding: 10px;
-`;
+  `;
 
 const CreatePage = styled.button`
 `; 
 
+const RoomData = styled.div`
+  display: flex;
+  flex-direction: row ;
+  justify-content: space-between;
+  margin-right: 20px;
+  border-radius: 8px;
+  gap: 10px;
+  border: dashed black 2px;
+
+  h2{
+    font-size: 18px;
+    padding: 10px;
+  }
+`
 
 export default function SurveyPage() {
   const [searchParams] = useSearchParams();
@@ -97,8 +131,31 @@ export default function SurveyPage() {
     <PageWrap>
       <h1>관리자 페이지</h1>
       <div className='flex justify-between items-center'>
-        {room ? <RoomInfo room={room}></RoomInfo> : <button onClick={() => navigate('/create')}>create page</button>}
-        <SurveyQR className="h-[500px]" room_id={room_id}></SurveyQR>
+        {room ? <Wrapper>
+          <RoomData>
+            <h2>열차 이름 : {room['name']}</h2>
+            <h2>열차 정보 : {`${room['lineNum']}호선 ${room['trainNum']}호차 ${room['carNum']}번칸`}</h2>
+            <h2>내부 온도 : {room.aircons[0].temperature}</h2>
+            <h2>풍량 : {room.aircons[0].power}</h2>
+
+          </RoomData>
+          <div className="tmpDiv">
+          <RoomInfo room={room}></RoomInfo>
+          <SurveyQR></SurveyQR>
+          </div>
+
+        
+        </Wrapper>
+        : 
+        
+        
+        
+        
+        
+        <button onClick={() => navigate('/create')}>create page</button>}
+
+
+        
       </div>
       {room ?
       <VoteWrap>

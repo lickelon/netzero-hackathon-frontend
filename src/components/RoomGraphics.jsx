@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const Wrap = styled.div`
-  border: 1px solid lightblue;
-  background-color: grey;
+  border: 1px solid black;
+  background-color: #FFFDDD;
   width: 500px;
   height: ${(props) => {500 * props.height / props.width}}px;height: ${(props) => `${500 * props.height / props.width}px`};
   display: flex;
@@ -52,15 +52,18 @@ export default function RoomGraphics({room}) {
   return (
     <Wrap height={room.height} width={room.width}>
       {room['aircons'].map((aircon) => (
-        <ACObject key={idx++}
-          style={{ left: `${500 * (aircon.posX / room.width)}px`, top: `${500 * (room.height / room.width) * (aircon.posY / room.height)}px`}}
-        />
+        <img key={idx++} src="/air.png"
+          style={{position: "absolute", width:"40px", height:"30px", left: `${500 * (aircon.posX / room.width)}px`, top: `${500 * (room.height / room.width) * (aircon.posY / room.height)}px`}}
+        ></img>
       ))}
+
+
+
       {room['qrs'].map((qr) => (
-        <QRObject key={idx++}
-          style={{ left: `${500 * (qr.posX / room.width)}px`, top: `${500 * (room.height / room.width) * (qr.posY / room.height)}px`}}
+        <img key={idx++} src="/image.png"
+          style={{background:"white", position: "absolute", width:"40px", height:"40px", left: `${500 * (qr.posX / room.width)}px`, top: `${500 * (room.height / room.width) * (qr.posY / room.height)}px`}}
         />
-      ))}
+      ))} 
     </Wrap>
   );
 }

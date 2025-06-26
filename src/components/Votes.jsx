@@ -29,7 +29,7 @@ const Card = styled.div`
 const Row = styled.div`
   display: flex;
   justify-content: space-between;
-  font-size: 16px;
+  font-size: 14px;
   color: #3d3d3d;
 
   span.label {
