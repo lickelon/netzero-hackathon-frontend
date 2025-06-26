@@ -4,8 +4,6 @@ import './Form.css'
 import  testImg from '../../public/test.jpg'
 import { getRoom, sendVote } from '../services/Api.js';
 import { auth } from '../services/Auth.js';
-import TemperatureRadio from './TemperatureRadio.jsx';
-
 
 export default function Form({room_id}) {
   // 지하철 호선 
