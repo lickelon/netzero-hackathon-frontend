@@ -25,7 +25,6 @@ function NotFound() {
 export default function SurveyPage() {
   const query = new URLSearchParams(useLocation().search);
   const room_id = query.get('room_id');
-  console.log(room_id);
   
   const [notFound, setNotFound] = useState(false);
   const [loading, setLoading] = useState(true); // optional
@@ -59,7 +58,7 @@ export default function SurveyPage() {
 
   return (
     <PageWrap>
-      <Form roomData={room_id} />
+      <Form room_id={room_id} />
     </PageWrap>
   );
 }
