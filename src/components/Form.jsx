@@ -1,18 +1,38 @@
 import { useState } from 'react'
 import * as Forms from './Form.styles.js'
 import  testImg from '../../public/test.jpg'
-import { sendVote } from '../services/Api.js';
+import { getRoom, sendVote } from '../services/Api.js';
+import { auth } from '../services/Auth.js';
+import { useLocation } from 'react-router-dom';
 
 export default function Form() {
   // 지하철 호선 
-  const [trainLine, setTrainLine] = useState("default 호선");
+  const [trainLine, setTrainLine] = useState(null);
+  //const trainLine = roomInfo.lineNum;
+  
   // 지하철 칸
-  const [roomNum, setRoomNum] = useState("default 칸");
+  const [carNum, setCarNum] = useState(null);
+  //const carNum = roomInfo.roomId;
+  
   // 좌석 좌표
   const [point, setPoint] = useState();
   // 탑승 시간
   const [enterTime, setEnterTime] = useState(0);
   const [temperature, setTemperature] = useState(0);
+  
+  const query = new URLSearchParams(useLocation().search);
+  const room_id = query.get('room_id'); // ← 여기가 핵심
+
+  console.log(room_id);
+
+  const initRoomInfo = async () => {
+    const roomInfo = await getRoom(room_id);
+    
+    setCarNum(roomInfo.carNum);
+    setTrainLine(roomInfo.lineNum);
+  }
+
+  initRoomInfo();
 
   const handleImgClick = (e) => {
     const rect = e.target.getBoundingClientRect();
@@ -41,7 +61,7 @@ export default function Form() {
       score: temperature,
     }
 
-    sendVote("u123u123u", 1, voteData);
+    sendVote(auth(), room_id, voteData);
   }
 
   return (
@@ -64,14 +84,14 @@ export default function Form() {
         <Forms.Label htmlFor="train-line">
           현재 탑승한 지하철 호선
         </Forms.Label>
-        <Forms.Input id="train-line" type="text" value={trainLine} readOnly />
+        <Forms.Input id="train-line" type="text" value={trainLine ?  `${trainLine} 호선` : null} readOnly />
       </Forms.Block>
 
       <Forms.Block>
         <Forms.Label htmlFor="room-num">
           현재 탑승한 호차
         </Forms.Label>
-        <Forms.Input id="room-num" type="text" value={roomNum} readOnly />
+        <Forms.Input id="room-num" type="text" value={carNum ? `${carNum} 호차` : null} readOnly />
 
       </Forms.Block>
 

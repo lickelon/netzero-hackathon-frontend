@@ -66,7 +66,7 @@ export function getLatestVoteTime(uuid) {
 
 export async function getRoom(room_id) {
   //TODO: get Room data from backend
-  let room = await fetch('https://inha-net-zero-webapp.azurewebsites.net/room?room_id='+room_id)
+  let room = await fetch('https://inha-net-zero-webapp.azurewebsites.net/room?room_id=' + room_id)
   .then((response) => response.json());
   // let room = {};
   // room['name'] = 'my room';
