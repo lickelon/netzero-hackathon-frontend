@@ -1,7 +1,7 @@
 import { useState,useEffect } from 'react'
 import * as Forms from './Form.styles.js'
 import './Form.css'
-import  testImg from '../../public/test.jpg'
+import  testImg from '../../public/train.png'
 import { getRoom, sendVote } from '../services/Api.js';
 import { auth } from '../services/Auth.js';
 
